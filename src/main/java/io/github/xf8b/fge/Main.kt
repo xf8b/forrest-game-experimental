@@ -17,12 +17,14 @@
  * along with forrest-game-experimental. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.github.xf8b.forrestgameexperimental
+@file:JvmName("Main")
 
-class Main {
-    companion object {
-        @JvmStatic
-        fun main(vararg args: String) {
-        }
-    }
+package io.github.xf8b.fge
+
+import org.slf4j.LoggerFactory
+
+fun main(vararg args: String) {
+    val logger = LoggerFactory.getLogger("io.github.xf8b.fge.Main")
+
+    logger.info("Hello!")
 }

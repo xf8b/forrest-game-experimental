@@ -37,6 +37,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10") // kotlin reflection
     implementation("ch.qos.logback:logback-classic:1.2.10") // logging
+
     testImplementation(platform("org.junit:junit-bom:5.8.2")) // testing
     testImplementation("org.junit.jupiter:junit-jupiter") // testing
 }
@@ -45,6 +46,7 @@ java {
     toolchain {
         // require java 17
         languageVersion.set(JavaLanguageVersion.of(17))
+        vendor.set(JvmVendorSpec.ADOPTIUM)
     }
 
     // enable module-path inferring
@@ -52,15 +54,15 @@ java {
 }
 
 application {
-    mainModule.set("io.github.xf8b.forrestgameexperimental")
-    mainClass.set("io.github.xf8b.forrestgameexperimental.Main")
+    mainModule.set("io.github.xf8b.fge")
+    mainClass.set("io.github.xf8b.fge.Main")
 }
 
 tasks {
     withType<CompileKotlin>().configureEach {
         kotlinOptions {
-            jvmTarget = "17" // use java 17
-            languageVersion = "1.6" // use kotlin 1.6
+            jvmTarget = "17"
+            languageVersion = "1.6"
         }
     }
 
@@ -68,18 +70,18 @@ tasks {
         manifest {
             attributes(
                 "Manifest-Version" to "1.0",
-                "Main-Class" to "io.github.xf8b.forrestgameexperimental.Main"
+                "Main-Class" to "io.github.xf8b.fge.Main"
             )
         }
     }
 
     compileJava {
-        // set module version
-        options.javaModuleVersion.set(provider { project.version as String })
+        // set module version to project version
+        options.javaModuleVersion.set(provider { project.version.toString() })
     }
 
     test {
-        // use junit platform for testing
+        // use junit for testing
         useJUnitPlatform()
     }
 }
