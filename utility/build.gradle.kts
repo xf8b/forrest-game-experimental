@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile as CompileKotlin
 plugins {
     java // language
     kotlin("jvm") version "1.6.10" // language
-    application // running
+    `java-library` // library
 }
 
 // package details
 group = "io.github.xf8b"
-base.archivesName.set("forrest-game-experimental")
+base.archivesName.set("forrest-game-experimental-utility")
 version = "0.1.0"
 
 repositories {
@@ -36,7 +36,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10") // kotlin reflection
-    implementation("ch.qos.logback:logback-classic:1.2.10") // logging
+    api("ch.qos.logback:logback-classic:1.2.10") // logging
 
     testImplementation(platform("org.junit:junit-bom:5.8.2")) // testing
     testImplementation("org.junit.jupiter:junit-jupiter") // testing
@@ -44,18 +44,11 @@ dependencies {
 
 java {
     toolchain {
-        // require java 17
-        languageVersion.set(JavaLanguageVersion.of(17))
-        vendor.set(JvmVendorSpec.ADOPTIUM)
+        languageVersion.set(JavaLanguageVersion.of(17)) // require java 17
+        vendor.set(JvmVendorSpec.ADOPTIUM) // get a jdk from adoptium if no jdk was found
     }
 
-    // enable module-path inferring
-    modularity.inferModulePath.set(true)
-}
-
-application {
-    mainModule.set("io.github.xf8b.fge")
-    mainClass.set("io.github.xf8b.fge.Main")
+    modularity.inferModulePath.set(true) // enable module-path inferring
 }
 
 tasks {
@@ -66,22 +59,11 @@ tasks {
         }
     }
 
-    jar {
-        manifest {
-            attributes(
-                "Manifest-Version" to "1.0",
-                "Main-Class" to "io.github.xf8b.fge.Main"
-            )
-        }
-    }
-
     compileJava {
-        // set module version to project version
-        options.javaModuleVersion.set(provider { project.version.toString() })
+        options.javaModuleVersion.set(provider { project.version.toString() }) // set module version to project version
     }
 
     test {
-        // use junit for testing
-        useJUnitPlatform()
+        useJUnitPlatform() // use junit for testing
     }
 }

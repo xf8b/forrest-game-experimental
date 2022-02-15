@@ -19,12 +19,14 @@
 
 @file:JvmName("Main")
 
-package io.github.xf8b.fge
+package io.github.xf8b.fge.libgdx
 
-import org.slf4j.LoggerFactory
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 
-fun main(vararg args: String) {
-    val logger = LoggerFactory.getLogger("io.github.xf8b.fge.Main")
-
-    logger.info("Hello!")
+fun main() {
+    val configuration = LwjglApplicationConfiguration().apply {
+        title = "forrest-game-experimental"
+        height = 710
+        width = 710
+    }
 }

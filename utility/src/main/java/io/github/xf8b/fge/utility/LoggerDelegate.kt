@@ -15,10 +15,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with forrest-game-experimental. If not, see <https://www.gnu.org/licenses/>.
- *
- * This file comes from ats-job-book:
- * https://github.com/xf8b/ats-job-book/blob/8f10fa61db713835f674fc1af67c22f7902ce176/src/main/java/io/github/xf8b/atsjobbook/utility/LoggerDelegate.kt
- * It has been partially edited to clean it up and make it look nicer.
  */
 
 package io.github.xf8b.fge.utility
@@ -31,9 +27,10 @@ import kotlin.reflect.KProperty
 class LoggerDelegate<in T : Any> {
     private lateinit var logger: Logger
 
+    /** Provides a [Logger] based on [thisReference]'s class name. Companion objects use their parent's name. */
     operator fun getValue(thisReference: T, property: KProperty<*>): Logger {
         if (!::logger.isInitialized) {
-            // if the logger has not been set, set it
+            // if the logger hasn't been set, set it
             logger = LoggerFactory.getLogger(
                 // if thisReference is a companion object, use the enclosing class instead
                 if (thisReference::class.isCompanion) thisReference.javaClass.enclosingClass

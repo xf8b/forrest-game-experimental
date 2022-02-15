@@ -18,3 +18,4 @@
  */
 
 rootProject.name = "forrest-game-experimental"
+include("libgdx", "utility")
