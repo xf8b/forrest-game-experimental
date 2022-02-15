@@ -21,29 +21,29 @@ package io.github.xf8b.fge.utility
 
 /** An immutable (x, y) coordinate pair. */
 data class Coordinate(val x: Int, val y: Int) {
-    private fun validateAmount(amount: Int): Int =
+    private fun validateAmount(amount: Int) =
         if (amount <= 0) throw IllegalArgumentException("The amount must be greater than 0!")
         else amount
 
-    private fun horizontal(amount: Int): Coordinate = copy(
+    private fun horizontal(amount: Int) = copy(
         x = this.x + amount,
         y = this.y
     )
 
-    private fun vertical(amount: Int): Coordinate = copy(
+    private fun vertical(amount: Int) = copy(
         x = this.x,
         y = this.y + amount
     )
 
     /** Returns a new [Coordinate] with the [x] moved left by [amount]. */
-    fun left(amount: Int = 1): Coordinate = horizontal(-validateAmount(amount))
+    fun left(amount: Int = 1) = horizontal(-validateAmount(amount))
 
     /** Returns a new [Coordinate] with the [x] moved right by [amount]. */
-    fun right(amount: Int = 1): Coordinate = horizontal(+validateAmount(amount))
+    fun right(amount: Int = 1) = horizontal(+validateAmount(amount))
 
     /** Returns a new [Coordinate] with the [y] moved down by [amount]. */
-    fun down(amount: Int = 1): Coordinate = vertical(-validateAmount(amount))
+    fun down(amount: Int = 1) = vertical(-validateAmount(amount))
 
     /** Returns a new [Coordinate] with the [y] moved up by [amount]. */
-    fun up(amount: Int = 1): Coordinate = vertical(+validateAmount(amount))
+    fun up(amount: Int = 1) = vertical(+validateAmount(amount))
 }
