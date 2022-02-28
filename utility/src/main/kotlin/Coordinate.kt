@@ -46,4 +46,6 @@ data class Coordinate(val x: Int, val y: Int) {
 
     /** Returns a new [Coordinate] with the [y] moved up by [amount]. */
     fun up(amount: Int = 1) = vertical(+validateAmount(amount))
+
+    override fun toString() = "($x, $y)"
 }

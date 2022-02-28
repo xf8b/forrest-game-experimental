@@ -17,7 +17,7 @@
  * along with forrest-game-experimental. If not, see <https://www.gnu.org/licenses/>.
  */
 
-@file:JvmName("Main")
+@file:JvmName("EntryPoint")
 
 package io.github.xf8b.fge.libgdx
 

@@ -6,7 +6,7 @@ An experimental version of [ForrestGame](https://github.com/ilja615/ForrestGame)
 
 ## License
 
-![The official GPL v3 logo](https://www.gnu.org/graphics/gplv3-127x51.png)
+![](https://www.gnu.org/graphics/gplv3-127x51.png) <!-- decorative, doesn't require alt text -->
 
 Copyright (c) 2022 xf8b.
 

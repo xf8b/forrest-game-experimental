@@ -35,39 +35,31 @@ repositories {
 }
 
 dependencies {
+    // main dependencies
     implementation(project(":utility")) // utilities
-    implementation("com.badlogicgames.gdx:gdx:1.10.0") // gdx
-    implementation("com.badlogicgames.gdx:gdx-backend-lwjgl:1.10.0") // gdx
-    implementation("com.badlogicgames.gdx:gdx-platform:1.10.0:natives-desktop") // gdx
+    implementation("com.badlogicgames.gdx:gdx:1.10.0") // libGDX
+    implementation("com.badlogicgames.gdx:gdx-backend-lwjgl:1.10.0") // libGDX
+    implementation("com.badlogicgames.gdx:gdx-platform:1.10.0:natives-desktop") // libGDX
 
-    testImplementation(platform("org.junit:junit-bom:5.8.2")) // testing
-    testImplementation("org.junit.jupiter:junit-jupiter") // testing
+    // test dependencies
+    testImplementation(platform("org.junit:junit-bom:5.8.2")) // JUnit
+    testImplementation("org.junit.jupiter:junit-jupiter") // JUnit
 }
 
-java {
-    toolchain {
-        // require java 17
-        languageVersion.set(JavaLanguageVersion.of(17))
-        vendor.set(JvmVendorSpec.ADOPTIUM)
-    }
+kotlin {
+    jvmToolchain {
+        this as JavaToolchainSpec // must be JavaToolchainSpec
 
-    // enable module-path inferring
-    modularity.inferModulePath.set(true)
+        languageVersion.set(JavaLanguageVersion.of(17)) // require Java 17
+        vendor.set(JvmVendorSpec.ADOPTIUM) // get a JDK from Adoptium if no JDK was found
+    }
 }
 
 application {
-    mainModule.set("io.github.xf8b.fge.libgdx")
     mainClass.set("io.github.xf8b.fge.libgdx.Main")
 }
 
 tasks {
-    withType<CompileKotlin>().configureEach {
-        kotlinOptions {
-            jvmTarget = "17"
-            languageVersion = "1.6"
-        }
-    }
-
     jar {
         manifest {
             attributes(
@@ -77,13 +69,14 @@ tasks {
         }
     }
 
-    compileJava {
-        // set module version to project version
-        options.javaModuleVersion.set(provider { project.version.toString() })
+    withType<CompileKotlin>().configureEach {
+        kotlinOptions {
+            jvmTarget = "17"
+            languageVersion = "1.6"
+        }
     }
 
     test {
-        // use junit for testing
-        useJUnitPlatform()
+        useJUnitPlatform() // use junit for testing
     }
 }
