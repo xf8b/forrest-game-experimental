@@ -36,7 +36,7 @@ repositories {
 
 dependencies {
     // main dependencies
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10") // kotlin reflection
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.20") // kotlin reflection
     api("ch.qos.logback:logback-classic:1.2.11") // logging
 
     // test dependencies
