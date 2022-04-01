@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile as CompileKotlin
 
 plugins {
     java // language
-    kotlin("jvm") version "1.6.10" // language
+    kotlin("jvm") version "1.6.20" // language
     `java-library` // library
 }
 
