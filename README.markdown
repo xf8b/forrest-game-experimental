@@ -2,7 +2,7 @@
 
 ## Description
 
-An experimental version of [ForrestGame](https://github.com/ilja615/ForrestGame), a rogue-like turn-based survival game.
+An experimental version of [ForrestGame](https://github.com/ilja615/ForrestGame), a roguelike turn-based survival game.
 
 ## License
 

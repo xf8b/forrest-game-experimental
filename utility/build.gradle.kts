@@ -17,7 +17,7 @@
  * along with forrest-game-experimental. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile as CompileKotlin
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java // language
@@ -36,17 +36,17 @@ repositories {
 
 dependencies {
     // main dependencies
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.20") // kotlin reflection
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.20") // Kotlin reflection
     api("ch.qos.logback:logback-classic:1.2.11") // logging
 
     // test dependencies
-    testImplementation(platform("org.junit:junit-bom:5.8.2")) // testing
-    testImplementation("org.junit.jupiter:junit-jupiter") // testing
+    testImplementation(platform("org.junit:junit-bom:5.8.2")) // JUnit bill of materials
+    testImplementation("org.junit.jupiter:junit-jupiter") // JUnit Jupiter
 }
 
 kotlin {
     jvmToolchain {
-        this as JavaToolchainSpec // must be JavaToolchainSpec
+        this as JavaToolchainSpec
 
         languageVersion.set(JavaLanguageVersion.of(17)) // require Java 17
         vendor.set(JvmVendorSpec.ADOPTIUM) // get a JDK from Adoptium if no JDK was found
@@ -54,11 +54,23 @@ kotlin {
 }
 
 tasks {
-    withType<CompileKotlin>().configureEach {
+    withType<KotlinCompile>().configureEach {
         kotlinOptions {
             jvmTarget = "17"
             languageVersion = "1.6"
         }
+    }
+
+    withType<JavaCompile>().configureEach {
+        options.compilerArgs.addAll(
+            listOf(
+                "--patch-module", "io.github.xf8b.fge.utility=${sourceSets["main"].output.asPath}"
+            )
+        )
+    }
+
+    compileJava {
+        options.javaModuleVersion.set(provider { project.version as String })
     }
 
     test {

@@ -15,10 +15,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with forrest-game-experimental. If not, see <https://www.gnu.org/licenses/>.
- *
- * This file comes from ats-job-book:
- * https://github.com/xf8b/ats-job-book/blob/8f10fa61db713835f674fc1af67c22f7902ce176/src/main/java/io/github/xf8b/atsjobbook/utility/LoggerDelegate.kt
- * It has been partially edited to clean it up and make it look nicer.
  */
 
 package io.github.xf8b.fge.utility
